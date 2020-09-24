@@ -1,6 +1,4 @@
-# Space Shooter
-
-This is an example space shooter game. The main idea behind this project is to showcase the Phaser 3 framework in a typescript environment.
+# Star Shooter
 
 To setup the project run:
     npm install

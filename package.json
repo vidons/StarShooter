@@ -1,5 +1,5 @@
 {
-    "name": "SpaceShooter",
+    "name": "starshooter",
     "version": "1.0.0",
     "description": "",
     "main": "src/GameApp.ts",
