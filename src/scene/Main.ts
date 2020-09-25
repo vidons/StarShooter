@@ -21,7 +21,7 @@ class Main extends Phaser.Scene {
         this.ship1 = new FriendlyShips(this, this.cameras.main.width / 6 , this.cameras.main.height / 4, "galaxyClass").setInteractive();
         this.add.existing(this.ship1);
 
-        this.ship2 = new FriendlyShips(this, this.cameras.main.width / 6 , this.ship1.height + (this.cameras.main.height / 3), "galaxyClass").setInteractive();
+        this.ship2 = new FriendlyShips(this, this.cameras.main.width / 6 , this.ship1.height + (this.cameras.main.height / 3), "intrepidClass").setInteractive();
         this.add.existing(this.ship2);
 
         let friendlyMovement: number = this.ship1.movementLeft;
