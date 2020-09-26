@@ -18,17 +18,24 @@ class Main extends Phaser.Scene {
         this.background.setPosition(this.cameras.main.width / 2, this.cameras.main.height / 2);
         this.add.existing(this.background);
 
-        this.ship1 = new FriendlyShips(this, this.cameras.main.width / 6 , this.cameras.main.height / 4, "galaxyClass").setInteractive();
+        this.ship1 = new FriendlyShips(this, this.cameras.main.width / 7 , this.cameras.main.height / 4, "galaxyClass");
+        this.ship1.setScale(0.75, 0.75);
         this.add.existing(this.ship1);
+        console.log(this.ship1.width);
 
-        this.ship2 = new FriendlyShips(this, this.cameras.main.width / 6 , this.ship1.height + (this.cameras.main.height / 3), "intrepidClass").setInteractive();
+        //this.ship2 = new FriendlyShips(this, this.cameras.main.width / 6 , this.ship1.height + (this.cameras.main.height / 3), "intrepidClass").setInteractive( () => { move() });
+        this.ship2 = new FriendlyShips(this, this.cameras.main.width / 7 , this.ship1.height + (this.cameras.main.height / 3), "intrepidClass").setInteractive();
+        this.ship2.setScale(0.75, 0.75);
         this.add.existing(this.ship2);
 
+        /*
         let friendlyMovement: number = this.ship1.movementLeft;
         this.ship1.on('pointerdown', function (pointer) {
             this.setTint(0xff0000);
             this.x += friendlyMovement;
         })
+        */
+
         /*
         this.galaxyClass = new Phaser.GameObjects.Image(this, this.cameras.main.width / 6 , this.cameras.main.height / 2, "galaxyClass").setInteractive();
         this.add.existing(this.galaxyClass);
@@ -51,7 +58,7 @@ class Main extends Phaser.Scene {
         });
         */
         
-        this.text = this.add.text(this.cameras.main.width / 2, this.cameras.main.height / 2, "Reset").setInteractive();
+        this.text = this.add.text(this.cameras.main.width / 2, this.cameras.main.height / 2, "Engage").setInteractive();
         this.text.setFontSize(28);
         
         this.text.on('pointerdown', function (pointer) {
@@ -59,6 +66,18 @@ class Main extends Phaser.Scene {
             
         })
 
+    }
+    update() {
+        //this.ship2.update();
+        
+        this.ship1.setInteractive().on('pointerdown', function (pointer) {
+            console.log();
+            this.update();
+        })
+        
+        this.ship2.on('pointerdown', function (pointer) {
+            this.update();
+        })
     }
 }
 
