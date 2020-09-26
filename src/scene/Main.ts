@@ -1,5 +1,5 @@
-import { FriendlyShips } from "../FriendlyShips";
-import { EnemyShips } from "../EnemyShips";
+import { FriendlyShips } from "../Ships/FriendlyShips";
+import { EnemyShips } from "../Ships/EnemyShips";
 
 class Main extends Phaser.Scene {
     private background: Phaser.GameObjects.Sprite;
