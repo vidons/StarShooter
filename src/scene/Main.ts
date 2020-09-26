@@ -23,16 +23,29 @@ class Main extends Phaser.Scene {
         this.ship1 = new FriendlyShips(this, this.cameras.main.width * 0.15 , this.cameras.main.height / 4, "galaxyClass");
         this.ship1.setScale(0.75, 0.75);
         this.add.existing(this.ship1);
-        console.log(this.ship1.width);
 
         //this.ship2 = new FriendlyShips(this, this.cameras.main.width / 6 , this.ship1.height + (this.cameras.main.height / 3), "intrepidClass").setInteractive( () => { move() });
-        this.ship2 = new FriendlyShips(this, this.cameras.main.width / 7 , this.ship1.height + (this.cameras.main.height / 3), "intrepidClass").setInteractive();
+        this.ship2 = new FriendlyShips(this, this.cameras.main.width / 7 , this.ship1.height + (this.cameras.main.height / 3), "intrepidClass");
         this.ship2.setScale(0.75, 0.75);
         this.add.existing(this.ship2);
 
-        this.ship3 = new EnemyShips(this, this.cameras.main.width * 0.85, this.cameras.main.height / 4, "CubeClass").setInteractive();
+        this.ship3 = new EnemyShips(this, this.cameras.main.width * 0.85, this.cameras.main.height / 4, "CubeClass");
         this.ship3.setScale(0.7, 0.7);
         this.add.existing(this.ship3);
+
+
+
+        this.ship1.setInteractive().on('pointerdown', function (pointer) {
+            this.friendlyShipUpdate();
+        })
+        
+        this.ship2.setInteractive().on('pointerdown', function (pointer) {
+            this.friendlyShipUpdate();
+        })
+
+        this.ship3.setInteractive().on('pointerdown', function (pointer) {
+            this.enemyShipUpdate();
+        })
 
         /*
         let friendlyMovement: number = this.ship1.movementLeft;
@@ -69,25 +82,11 @@ class Main extends Phaser.Scene {
         
         this.btnBattle.on('pointerdown', function (pointer) {
             this.setTint(0xff0000);
-            
         })
 
     }
     update() {
-        //this.ship2.update();
-        
-        this.ship1.setInteractive().on('pointerdown', function (pointer) {
-            console.log();
-            this.friendlyShipUpdate();
-        })
-        
-        this.ship2.on('pointerdown', function (pointer) {
-            this.friendlyShipUpdate();
-        })
 
-        this.ship3.on('pointerdown', function (pointer) {
-            this.enemyShipUpdate();
-        })
     }
 }
 

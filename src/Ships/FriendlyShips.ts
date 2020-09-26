@@ -2,7 +2,7 @@ import { CreateShip } from "./CreateShip";
 
 class FriendlyShips extends CreateShip {
 
-    moveLeft: number = 100;
+    moveLeft: number = 200;
 
     constructor (scene: Phaser.Scene, x: number, y: number, texture: string) {
         super (scene, x, y, texture)
@@ -16,7 +16,8 @@ class FriendlyShips extends CreateShip {
         // console.log(time, delta);
         //this.setTint(0xff0000);
         this.setTint(0xff0000);
-        this.setPosition(350, 256);
+        this.setPosition(this.x + this.moveLeft, this.y);
+        console.log(this.height);
         //this.handleKeyboardInput(deltaTime);
     }
 

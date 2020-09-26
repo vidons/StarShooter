@@ -2,7 +2,7 @@ import { CreateShip } from "./CreateShip";
 
 class EnemyShips extends CreateShip {
 
-    moveRight: number = 100;
+    moveRight: number = 200;
 
     constructor (scene: Phaser.Scene, x: number, y: number, texture: string) {
         super (scene, x, y, texture)
@@ -16,7 +16,7 @@ class EnemyShips extends CreateShip {
         // console.log(time, delta);
         //this.setTint(0xff0000);
         this.setTint(0xff0000);
-        this.setPosition(750, 256);
+        this.setPosition(this.x - this.moveRight, this.y);
         //this.handleKeyboardInput(deltaTime);
     }
 
