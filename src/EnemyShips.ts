@@ -1,22 +1,22 @@
 import { CreateShip } from "./CreateShip";
 
-class FriendlyShips extends CreateShip {
+class EnemyShips extends CreateShip {
 
-    moveLeft: number = 100;
+    moveRight: number = 100;
 
     constructor (scene: Phaser.Scene, x: number, y: number, texture: string) {
         super (scene, x, y, texture)
     }
 
-    public get movementLeft(): number {
-        return this.moveLeft;
+    public get movementRight(): number {
+        return this.moveRight;
     }
 
-    public friendlyShipUpdate(): void {
+    public enemyShipUpdate(): void {
         // console.log(time, delta);
         //this.setTint(0xff0000);
         this.setTint(0xff0000);
-        this.setPosition(350, 256);
+        this.setPosition(750, 256);
         //this.handleKeyboardInput(deltaTime);
     }
 
@@ -29,4 +29,4 @@ class FriendlyShips extends CreateShip {
     */
 }
 
-export { FriendlyShips }
+export { EnemyShips }
