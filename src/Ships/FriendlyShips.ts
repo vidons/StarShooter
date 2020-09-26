@@ -17,7 +17,6 @@ class FriendlyShips extends CreateShip {
         //this.setTint(0xff0000);
         this.setTint(0xff0000);
         this.setPosition(this.x + this.moveLeft, this.y);
-        console.log(this.height);
         //this.handleKeyboardInput(deltaTime);
     }
 

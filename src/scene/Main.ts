@@ -25,7 +25,7 @@ class Main extends Phaser.Scene {
         this.add.existing(this.ship1);
 
         //this.ship2 = new FriendlyShips(this, this.cameras.main.width / 6 , this.ship1.height + (this.cameras.main.height / 3), "intrepidClass").setInteractive( () => { move() });
-        this.ship2 = new FriendlyShips(this, this.cameras.main.width / 7 , this.ship1.height + (this.cameras.main.height / 3), "intrepidClass");
+        this.ship2 = new FriendlyShips(this, this.cameras.main.width / 7 , (this.cameras.main.height / 4) * 3, "intrepidClass");
         this.ship2.setScale(0.75, 0.75);
         this.add.existing(this.ship2);
 
@@ -35,15 +35,15 @@ class Main extends Phaser.Scene {
 
 
 
-        this.ship1.setInteractive().on('pointerdown', function (pointer) {
-            this.friendlyShipUpdate();
-        })
-        
-        this.ship2.setInteractive().on('pointerdown', function (pointer) {
+        this.ship1.setInteractive().once('pointerdown', function (pointer) {
             this.friendlyShipUpdate();
         })
 
-        this.ship3.setInteractive().on('pointerdown', function (pointer) {
+        this.ship2.setInteractive().once('pointerdown', function (pointer) {
+            this.friendlyShipUpdate();
+        })
+
+        this.ship3.setInteractive().once('pointerdown', function (pointer) {
             this.enemyShipUpdate();
         })
 
@@ -79,12 +79,14 @@ class Main extends Phaser.Scene {
         
         this.btnBattle = this.add.text(this.cameras.main.width / 2, this.cameras.main.height / 2, "Engage").setInteractive();
         this.btnBattle.setFontSize(28);
+        this.btnBattle.setFontFamily("Arial")
         
-        this.btnBattle.on('pointerdown', function (pointer) {
+        this.btnBattle.once('pointerdown', function (pointer) {
             this.setTint(0xff0000);
         })
 
     }
+
     update() {
 
     }
