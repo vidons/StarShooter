@@ -8,25 +8,10 @@ class EnemyShips extends CreateShip {
         super (scene, x, y, texture)
     }
 
-    public get movementRight(): number {
-        return this.moveRight;
-    }
-
     public enemyShipUpdate(): void {
-        // console.log(time, delta);
-        //this.setTint(0xff0000);
         this.setTint(0xff0000);
         this.setPosition(this.x - this.moveRight, this.y);
-        //this.handleKeyboardInput(deltaTime);
     }
-
-    /*
-    let friendlyMovement: number = this.ship1.movementLeft;
-    this.ship1.on('pointerdown', function (pointer) {
-        this.setTint(0xff0000);
-        this.x += friendlyMovement;
-    })
-    */
 }
 
 export { EnemyShips }

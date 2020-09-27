@@ -1,4 +1,4 @@
-import { ShipModel } from "../Ships/ShipModel";
+import { ShipModel } from "../ships/ShipModel";
 
 class Preload extends Phaser.Scene {
     private readonly BOX_WIDTH: number = 320;

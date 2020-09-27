@@ -1,7 +1,8 @@
 import { BackgroundGraphic } from "../BackgroundGraphic";
-import { FriendlyShips } from "../Ships/FriendlyShips";
-import { EnemyShips } from "../Ships/EnemyShips";
-import { ShipModel } from "../Ships/ShipModel";
+import { FriendlyShips } from "../ships/FriendlyShips";
+import { EnemyShips } from "../ships/EnemyShips";
+import { ShipModel } from "../ships/ShipModel";
+import { BattleBtn } from "../BattleBtn";
 
 class Main extends Phaser.Scene {
     private background: BackgroundGraphic;
@@ -10,12 +11,13 @@ class Main extends Phaser.Scene {
     private ship2: FriendlyShips;
     private ship3: EnemyShips;
 
-    private btnBattle: Phaser.GameObjects.Text;
+    //private btnBattle: Phaser.GameObjects.Text;
+    private btnBattle: BattleBtn;
 
     private selectedShip: number;
 
-    private friendlyShipScale: number = 0.75;
-    private enemyyShipScale: number = 0.70;
+    private readonly friendlyShipScale: number = 0.75;
+    private readonly enemyyShipScale: number = 0.70;
 
     constructor() {
         super("main");
@@ -26,20 +28,21 @@ class Main extends Phaser.Scene {
         this.add.existing(this.background);
 
         this.ship1 = new FriendlyShips(this, this.cameras.main.width * 0.15, this.cameras.main.height / 4, ShipModel.GALAXY.toString());
-        this.ship1.setScale(this.friendlyShipScale, this.friendlyShipScale);
+        this.ship1.setScale(this.friendlyShipScale);
         this.add.existing(this.ship1);
 
         this.ship2 = new FriendlyShips(this, this.cameras.main.width / 7, (this.cameras.main.height / 4) * 3, ShipModel.INTREPID.toString());
-        this.ship2.setScale(this.friendlyShipScale, this.friendlyShipScale);
+        this.ship2.setScale(this.friendlyShipScale);
         this.add.existing(this.ship2);
 
         this.ship3 = new EnemyShips(this, this.cameras.main.width * 0.85, this.cameras.main.height / 4, ShipModel.CUBE.toString());
-        this.ship3.setScale(this.enemyyShipScale, this.enemyyShipScale);
+        this.ship3.setScale(this.enemyyShipScale);
         this.add.existing(this.ship3);
 
-        this.ship1.setInteractive().once('pointerdown', function (pointer) {
+        this.ship1.setInteractive().on('pointerdown', function (pointer) {
             this.friendlyShipUpdate();
         })
+
         this.ship2.setInteractive().once('pointerdown', function (pointer) {
             this.friendlyShipUpdate();
         })
@@ -48,21 +51,24 @@ class Main extends Phaser.Scene {
             this.enemyShipUpdate();
         })
 
-        this.btnBattle = this.add.text(this.cameras.main.width / 2, this.cameras.main.height / 2, "Engage").setInteractive();
+
+        this.btnBattle = new BattleBtn(this).setInteractive();
         this.btnBattle.setFontSize(28);
         this.btnBattle.setFontFamily("Arial")
 
         this.btnBattle.on('pointerdown', function (pointer) {
-            this.setTint(0xff0000);
+           this.setTint(0xff0000);
         })
-
+        
         this.btnBattle.on('pointerout', function (pointer) {
             this.clearTint();
         });
-
+        
         this.btnBattle.on('pointerup', function (pointer) {
             this.clearTint();
         });
+
+        this.add.existing(this.btnBattle);
     }
 
     update() {
