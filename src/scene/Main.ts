@@ -13,9 +13,6 @@ class Main extends Phaser.Scene {
 
     private btnBattle: BtnBattle;
 
-    selectedFriendlyShip: string;
-    selectedEnemyShip: string;
-
     private readonly friendlyShipScale: number = 0.75;
     private readonly enemyyShipScale: number = 0.70;
 
