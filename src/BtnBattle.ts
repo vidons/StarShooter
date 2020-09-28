@@ -1,10 +1,10 @@
-class BattleBtn extends Phaser.GameObjects.Text {
+class BtnBattle extends Phaser.GameObjects.Text {
 
     constructor(scene: Phaser.Scene) {
         super(scene, scene.cameras.main.width / 2, scene.cameras.main.height / 2, "Engage", null);
     }
     
-    public formatbtn(): void {
+    public btnBattleFormat(): void {
         this.setFontSize(28);
         this.setFontFamily("Arial");
 
@@ -22,4 +22,4 @@ class BattleBtn extends Phaser.GameObjects.Text {
     }
 }
 
-export { BattleBtn } 
+export { BtnBattle } 

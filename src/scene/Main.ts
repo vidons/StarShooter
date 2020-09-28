@@ -2,7 +2,7 @@ import { BackgroundGraphic } from "../BackgroundGraphic";
 import { FriendlyShips } from "../ships/FriendlyShips";
 import { EnemyShips } from "../ships/EnemyShips";
 import { ShipModel } from "../ships/ShipModel";
-import { BattleBtn } from "../BattleBtn";
+import { BtnBattle } from "../BtnBattle";
 
 class Main extends Phaser.Scene {
     private background: BackgroundGraphic;
@@ -11,7 +11,7 @@ class Main extends Phaser.Scene {
     private ship2: FriendlyShips;
     private ship3: EnemyShips;
 
-    private btnBattle: BattleBtn;
+    private btnBattle: BtnBattle;
 
     selectedFriendlyShip: string;
     selectedEnemyShip: string;
@@ -51,8 +51,8 @@ class Main extends Phaser.Scene {
             this.enemyShipUpdate();
         })
         
-        this.btnBattle = new BattleBtn(this).setInteractive();
-        this.btnBattle.formatbtn();
+        this.btnBattle = new BtnBattle(this).setInteractive();
+        this.btnBattle.btnBattleFormat();
         this.add.existing(this.btnBattle);
     }
 
