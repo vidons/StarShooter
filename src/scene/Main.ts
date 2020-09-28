@@ -11,10 +11,10 @@ class Main extends Phaser.Scene {
     private ship2: FriendlyShips;
     private ship3: EnemyShips;
 
-    //private btnBattle: Phaser.GameObjects.Text;
     private btnBattle: BattleBtn;
 
-    private selectedShip: number;
+    selectedFriendlyShip: string;
+    selectedEnemyShip: string;
 
     private readonly friendlyShipScale: number = 0.75;
     private readonly enemyyShipScale: number = 0.70;
@@ -39,35 +39,20 @@ class Main extends Phaser.Scene {
         this.ship3.setScale(this.enemyyShipScale);
         this.add.existing(this.ship3);
 
-        this.ship1.setInteractive().on('pointerdown', function (pointer) {
+        this.ship1.setInteractive().once('pointerdown', function (pointer) {
             this.friendlyShipUpdate();
         })
-
+        
         this.ship2.setInteractive().once('pointerdown', function (pointer) {
             this.friendlyShipUpdate();
         })
-
+        
         this.ship3.setInteractive().once('pointerdown', function (pointer) {
             this.enemyShipUpdate();
         })
-
-
+        
         this.btnBattle = new BattleBtn(this).setInteractive();
-        this.btnBattle.setFontSize(28);
-        this.btnBattle.setFontFamily("Arial")
-
-        this.btnBattle.on('pointerdown', function (pointer) {
-           this.setTint(0xff0000);
-        })
-        
-        this.btnBattle.on('pointerout', function (pointer) {
-            this.clearTint();
-        });
-        
-        this.btnBattle.on('pointerup', function (pointer) {
-            this.clearTint();
-        });
-
+        this.btnBattle.formatbtn();
         this.add.existing(this.btnBattle);
     }
 
