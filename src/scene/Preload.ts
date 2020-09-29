@@ -46,15 +46,6 @@ class Preload extends Phaser.Scene {
 
         this.load.atlas("ships", "assets/images/ships.png", "assets/images/ships.json")
 
-        //audio
-        this.load.audio("laser1", ["assets/audio/laser1.ogg", "assets/audio/laser1.mp3", "assets/audio/laser1.m4a"]);
-        this.load.audio("laser2", ["assets/audio/laser2.ogg", "assets/audio/laser2.mp3", "assets/audio/laser2.m4a"]);
-        this.load.audio("laser3", ["assets/audio/laser3.ogg", "assets/audio/laser3.mp3", "assets/audio/laser3.m4a"]);
-        this.load.audio("shortExplosion1", ["assets/audio/shortExplosion1.ogg", "assets/audio/shortExplosion1.mp3", "assets/audio/shortExplosion1.m4a"]);
-        this.load.audio("shortExplosion2", ["assets/audio/shortExplosion2.ogg", "assets/audio/shortExplosion2.mp3", "assets/audio/shortExplosion2.m4a"]);
-        this.load.audio("largeExplosion1", ["assets/audio/largeExplosion1.ogg", "assets/audio/largeExplosion1.mp3", "assets/audio/largeExplosion1.m4a"]);
-        this.load.audio("largeExplosion2", ["assets/audio/largeExplosion2.ogg", "assets/audio/largeExplosion2.mp3", "assets/audio/largeExplosion2.m4a"]);
-
         //preloader code
         this.load.on("progress", this.onProgressUpdated, this);
         this.load.on("load", this.onFileLoaded, this);
