@@ -2,9 +2,8 @@ class BtnBattle extends Phaser.GameObjects.Text {
 
     constructor(scene: Phaser.Scene) {
         super(scene, scene.cameras.main.width / 2, scene.cameras.main.height / 2, "Engage", null);
-    }
-    
-    public btnBattleFormat(): void {
+
+        this.setInteractive();
         this.setFontSize(28);
         this.setFontFamily("Arial");
 

@@ -48,8 +48,7 @@ class Main extends Phaser.Scene {
             this.enemyShipUpdate();
         })
         
-        this.btnBattle = new BtnBattle(this).setInteractive();
-        this.btnBattle.btnBattleFormat();
+        this.btnBattle = new BtnBattle(this);
         this.add.existing(this.btnBattle);
     }
 
