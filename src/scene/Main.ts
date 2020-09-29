@@ -25,19 +25,19 @@ class Main extends Phaser.Scene {
         this.background = new BackgroundGraphic(this);
         this.add.existing(this.background);
 
-        this.ship1 = new FriendlyShips(this, this.cameras.main.width * 0.15, this.cameras.main.height / 4, ShipModel.GALAXY.toString());
+        this.ship1 = new FriendlyShips(this, this.cameras.main.width * 0.15, this.cameras.main.height / 4, "ships", "GalaxyClass");
         this.ship1.setScale(this.friendlyShipScale);
         this.add.existing(this.ship1);
 
-        this.ship2 = new FriendlyShips(this, this.cameras.main.width / 7, (this.cameras.main.height / 4) * 3, ShipModel.INTREPID.toString());
+        this.ship2 = new FriendlyShips(this, this.cameras.main.width / 7, (this.cameras.main.height / 4) * 3, "ships", "IntrepidClass");
         this.ship2.setScale(this.friendlyShipScale);
         this.add.existing(this.ship2);
 
-        this.ship3 = new EnemyShips(this, this.cameras.main.width * 0.85, this.cameras.main.height / 4, ShipModel.CUBE.toString());
+        this.ship3 = new EnemyShips(this, this.cameras.main.width * 0.85, this.cameras.main.height / 4, "ships", "CubeClass");
         this.ship3.setScale(this.enemyyShipScale);
         this.add.existing(this.ship3);
 
-        this.ship4 = new EnemyShips(this, this.cameras.main.width * 0.85, (this.cameras.main.height / 4) * 3, "probeClass");
+        this.ship4 = new EnemyShips(this, this.cameras.main.width * 0.85, (this.cameras.main.height / 4) * 3, "ships", "ProbeClass");
         this.ship4.setScale(this.enemyyShipScale);
         this.add.existing(this.ship4);
 

@@ -4,8 +4,8 @@ class EnemyShips extends CreateShip {
 
     moveRight: number = 200;
 
-    constructor (scene: Phaser.Scene, x: number, y: number, texture: string) {
-        super (scene, x, y, texture)
+    constructor (scene: Phaser.Scene, x: number, y: number, texture: string, frame: string) {
+        super (scene, x, y, texture, frame)
     }
 
     public enemyShipUpdate(): void {

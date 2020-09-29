@@ -4,8 +4,8 @@ class FriendlyShips extends CreateShip {
 
     moveLeft: number = 200;
 
-    constructor (scene: Phaser.Scene, x: number, y: number, texture: string) {
-        super (scene, x, y, texture)
+    constructor (scene: Phaser.Scene, x: number, y: number, texture: string, frame: string) {
+        super (scene, x, y, texture, frame)
     }
 
     public friendlyShipUpdate(): void {
