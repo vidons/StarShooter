@@ -1,4 +1,4 @@
-import { CreateShip } from "./CreateShip";
+import { CreateShip } from "./Ship";
 
 class FriendlyShips extends CreateShip {
 
