@@ -1,7 +1,6 @@
 import { BackgroundGraphic } from "../BackgroundGraphic";
 import { FriendlyShips } from "../ships/FriendlyShips";
 import { EnemyShips } from "../ships/EnemyShips";
-import { ShipModel } from "../ships/ShipModel";
 import { BtnBattle } from "../BtnBattle";
 
 class Main extends Phaser.Scene {

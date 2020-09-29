@@ -1,5 +1,3 @@
-import { ShipModel } from "../ships/ShipModel";
-
 class Preload extends Phaser.Scene {
     private readonly BOX_WIDTH: number = 320;
     private readonly BOX_HEIGHT: number = 50;
@@ -43,7 +41,6 @@ class Preload extends Phaser.Scene {
         //images
         this.load.image("background", "assets/images/background.png");
         this.load.atlas("foreground", "assets/images/foreground.png", "assets/images/foreground.json");
-
         this.load.atlas("ships", "assets/images/ships.png", "assets/images/ships.json")
 
         //preloader code
