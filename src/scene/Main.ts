@@ -10,6 +10,7 @@ class Main extends Phaser.Scene {
     private ship1: FriendlyShips;
     private ship2: FriendlyShips;
     private ship3: EnemyShips;
+    private ship4: EnemyShips;
 
     private btnBattle: BtnBattle;
 
@@ -36,6 +37,10 @@ class Main extends Phaser.Scene {
         this.ship3.setScale(this.enemyyShipScale);
         this.add.existing(this.ship3);
 
+        this.ship4 = new EnemyShips(this, this.cameras.main.width * 0.85, (this.cameras.main.height / 4) * 3, "probeClass");
+        this.ship4.setScale(this.enemyyShipScale);
+        this.add.existing(this.ship4);
+
         this.ship1.setInteractive().once('pointerdown', function (pointer) {
             this.friendlyShipUpdate();
         })
@@ -45,6 +50,10 @@ class Main extends Phaser.Scene {
         })
         
         this.ship3.setInteractive().once('pointerdown', function (pointer) {
+            this.enemyShipUpdate();
+        })
+
+        this.ship4.setInteractive().once('pointerdown', function (pointer) {
             this.enemyShipUpdate();
         })
         

@@ -47,6 +47,7 @@ class Preload extends Phaser.Scene {
         this.load.image(ShipModel.GALAXY.toString(), "assets/images/GalaxyClass.png");
         this.load.image(ShipModel.INTREPID.toString(), "assets/images/IntrepidClass.png");
         this.load.image(ShipModel.CUBE.toString(), "assets/images/CubeClass.png");
+        this.load.image("probeClass", "assets/images/ProbeClass.png");
 
         //audio
         this.load.audio("laser1", ["assets/audio/laser1.ogg", "assets/audio/laser1.mp3", "assets/audio/laser1.m4a"]);
