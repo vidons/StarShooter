@@ -1,7 +1,9 @@
+import { Physics } from "phaser";
 import { BackgroundGraphic } from "../BackgroundGraphic";
 import { FriendlyShips } from "../ships/FriendlyShips";
 import { EnemyShips } from "../ships/EnemyShips";
 import { BtnBattle } from "../BtnBattle";
+import { Torpedo } from "../Torpedo";
 
 class Main extends Phaser.Scene {
     private background: BackgroundGraphic;
@@ -11,7 +13,15 @@ class Main extends Phaser.Scene {
     private ship3: EnemyShips;
     private ship4: EnemyShips;
 
+    torpedo: Torpedo;
+    mouse: Phaser.Input.Pointer;
+    input: Phaser.Input.InputPlugin;
+    private worldBounds: Phaser.Types.Physics.Arcade.ArcadeWorldConfig;
+
+    control: boolean = false;
+
     private btnBattle: BtnBattle;
+
 
     constructor() {
         super("main");
@@ -36,11 +46,11 @@ class Main extends Phaser.Scene {
         this.ship1.setInteractive().once('pointerdown', function (pointer) {
             this.friendlyShipUpdate();
         })
-        
+
         this.ship2.setInteractive().once('pointerdown', function (pointer) {
             this.friendlyShipUpdate();
         })
-        
+
         this.ship3.setInteractive().once('pointerdown', function (pointer) {
             this.enemyShipUpdate();
         })
@@ -48,13 +58,32 @@ class Main extends Phaser.Scene {
         this.ship4.setInteractive().once('pointerdown', function (pointer) {
             this.enemyShipUpdate();
         })
-        
+
         this.btnBattle = new BtnBattle(this);
         this.add.existing(this.btnBattle);
+
+        this.mouse = this.input.mousePointer;
+        this.worldBounds = this.physics.world.bounds;
+
+        this.torpedo = new Torpedo(this);
     }
 
     update() {
+        if (this.mouse.isDown && this.control == false) {
+            this.torpedo = this.physics.add.sprite(384, 256, 'torpedo');
 
+            this.physics.moveTo(this.torpedo, this.input.x, this.input.y, 500);
+            this.control = true;
+            this.physics.add.overlap(this.torpedo, this.ship1, destroy, null, this);
+        }
+        //this.ship1.destroy(); //np
+        function destroy() { //wrong place for function
+                this.ship1.destroy(); //Or not... :)
+        }
+
+        if (this.torpedo.x > this.worldBounds.width || this.torpedo.y > this.worldBounds.height || this.torpedo.x < 0 || this.torpedo.y < 0) {
+            this.control = false;
+        }
     }
 }
 

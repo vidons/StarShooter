@@ -15,6 +15,14 @@ class GameApp extends Phaser.Game {
                 type: Phaser.AUTO,
                 parent: "content",
                 backgroundColor: '#385e78',
+
+                physics:{
+                    default:'arcade',
+                    arcade:{
+                        gravity:{y:0}
+                    }
+                }, 
+                
                 width: 1024,
                 height: 512,
                 scene: [Boot, SplashScene, Preload, Main]
