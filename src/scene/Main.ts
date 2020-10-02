@@ -37,8 +37,6 @@ class Main extends Phaser.Scene {
         this.shipGroup.create(this.cameras.main.width * 0.85, this.cameras.main.height / 4, "ships", "CubeClass");
         this.shipGroup.create(this.cameras.main.width * 0.85, (this.cameras.main.height / 4) * 3, "ships", "ProbeClass");
 
-        this.btnBattle = new BtnBattle(this);
-        this.add.existing(this.btnBattle);
 
         this.mouse = this.input.mousePointer;
         this.worldBounds = this.physics.world.bounds;
@@ -54,18 +52,18 @@ class Main extends Phaser.Scene {
             this.torpedo = this.physics.add.sprite(512, 256, 'torpedo');
             this.physics.moveTo(this.torpedo, this.input.x, this.input.y, 750);
             this.control = true;
-   
         }
 
         if (this.torpedo.x > this.worldBounds.width || this.torpedo.y > this.worldBounds.height || this.torpedo.x < 0 || this.torpedo.y < 0) {
             this.control = false;
         }
-
-
     }
+
 }
 
+
 function destroy(torpedo, shipGroup): void {
+
     shipGroup.destroy(true, true);
     //console.log(shipGroup.children.size);
     console.log();
@@ -73,7 +71,12 @@ function destroy(torpedo, shipGroup): void {
     this.control = false;
 
     if (this.shipGroup.getChildren().length == 0) {
-        console.log("Win!");
+        timer: Phaser.Time.TimerEvent = this.scene.scene.time.delayedCall(2000, () => {
+            console.log("Win!");
+            this.btnBattle = new BtnBattle(this);
+            this.add.existing(this.btnBattle);
+        }, null, this);
+
     }
 }
 
