@@ -50,23 +50,31 @@ class Main extends Phaser.Scene {
         this.physics.add.overlap(this.torpedo, this.shipGroup, destroy, null, this);
 
         if (this.mouse.isDown && this.control == false) {
-            this.torpedo = this.physics.add.sprite(512, 256, 'torpedo');
 
+            this.torpedo = this.physics.add.sprite(512, 256, 'torpedo');
             this.physics.moveTo(this.torpedo, this.input.x, this.input.y, 750);
             this.control = true;
+   
         }
-
 
         if (this.torpedo.x > this.worldBounds.width || this.torpedo.y > this.worldBounds.height || this.torpedo.x < 0 || this.torpedo.y < 0) {
             this.control = false;
         }
+
+
     }
 }
 
 function destroy(torpedo, shipGroup): void {
-    shipGroup.disableBody(true, true);
+    shipGroup.destroy(true, true);
+    //console.log(shipGroup.children.size);
+    console.log();
     torpedo.disableBody(true, true);
     this.control = false;
+
+    if (this.shipGroup.getChildren().length == 0) {
+        console.log("Win!");
+    }
 }
 
 export { Main }
