@@ -8,14 +8,12 @@ import { Torpedo } from "../Torpedo";
 class Main extends Phaser.Scene {
     private background: BackgroundGraphic;
 
-    private ship1: FriendlyShips;
-    private ship2: FriendlyShips;
-    private ship3: EnemyShips;
-    private ship4: EnemyShips;
+    shipGroup: Phaser.Physics.Arcade.Group;
+    private torpedo: Torpedo;
 
-    torpedo: Torpedo;
-    mouse: Phaser.Input.Pointer;
-    input: Phaser.Input.InputPlugin;
+    private mouse: Phaser.Input.Pointer;
+    public input: Phaser.Input.InputPlugin;
+
     private worldBounds: Phaser.Types.Physics.Arcade.ArcadeWorldConfig;
 
     control: boolean = false;
@@ -27,37 +25,17 @@ class Main extends Phaser.Scene {
         super("main");
     }
 
+
     create() {
+
         this.background = new BackgroundGraphic(this);
         this.add.existing(this.background);
 
-        this.ship1 = new FriendlyShips(this, this.cameras.main.width * 0.15, this.cameras.main.height / 4, "ships", "GalaxyClass");
-        this.add.existing(this.ship1);
-
-        this.ship2 = new FriendlyShips(this, this.cameras.main.width / 7, (this.cameras.main.height / 4) * 3, "ships", "IntrepidClass");
-        this.add.existing(this.ship2);
-
-        this.ship3 = new EnemyShips(this, this.cameras.main.width * 0.85, this.cameras.main.height / 4, "ships", "CubeClass");
-        this.add.existing(this.ship3);
-
-        this.ship4 = new EnemyShips(this, this.cameras.main.width * 0.85, (this.cameras.main.height / 4) * 3, "ships", "ProbeClass");
-        this.add.existing(this.ship4);
-
-        this.ship1.setInteractive().once('pointerdown', function (pointer) {
-            this.friendlyShipUpdate();
-        })
-
-        this.ship2.setInteractive().once('pointerdown', function (pointer) {
-            this.friendlyShipUpdate();
-        })
-
-        this.ship3.setInteractive().once('pointerdown', function (pointer) {
-            this.enemyShipUpdate();
-        })
-
-        this.ship4.setInteractive().once('pointerdown', function (pointer) {
-            this.enemyShipUpdate();
-        })
+        this.shipGroup = this.physics.add.group();
+        this.shipGroup.create(this.cameras.main.width * 0.15, this.cameras.main.height / 4, "ships", "GalaxyClass");
+        this.shipGroup.create(this.cameras.main.width / 7, (this.cameras.main.height / 4) * 3, "ships", "IntrepidClass");
+        this.shipGroup.create(this.cameras.main.width * 0.85, this.cameras.main.height / 4, "ships", "CubeClass");
+        this.shipGroup.create(this.cameras.main.width * 0.85, (this.cameras.main.height / 4) * 3, "ships", "ProbeClass");
 
         this.btnBattle = new BtnBattle(this);
         this.add.existing(this.btnBattle);
@@ -69,22 +47,26 @@ class Main extends Phaser.Scene {
     }
 
     update() {
-        if (this.mouse.isDown && this.control == false) {
-            this.torpedo = this.physics.add.sprite(384, 256, 'torpedo');
+        this.physics.add.overlap(this.torpedo, this.shipGroup, destroy, null, this);
 
-            this.physics.moveTo(this.torpedo, this.input.x, this.input.y, 500);
+        if (this.mouse.isDown && this.control == false) {
+            this.torpedo = this.physics.add.sprite(512, 256, 'torpedo');
+
+            this.physics.moveTo(this.torpedo, this.input.x, this.input.y, 750);
             this.control = true;
-            this.physics.add.overlap(this.torpedo, this.ship1, destroy, null, this);
         }
-        //this.ship1.destroy(); //np
-        function destroy() { //wrong place for function
-                this.ship1.destroy(); //Or not... :)
-        }
+
 
         if (this.torpedo.x > this.worldBounds.width || this.torpedo.y > this.worldBounds.height || this.torpedo.x < 0 || this.torpedo.y < 0) {
             this.control = false;
         }
     }
+}
+
+function destroy(torpedo, shipGroup): void {
+    shipGroup.disableBody(true, true);
+    torpedo.disableBody(true, true);
+    this.control = false;
 }
 
 export { Main }

@@ -6,6 +6,8 @@ class EnemyShips extends CreateShip {
 
     constructor (scene: Phaser.Scene, x: number, y: number, texture: string, frame: string) {
         super (scene, x, y, texture, frame)
+
+        scene.physics.add.existing(this);
     }
 
     public enemyShipUpdate(): void {
