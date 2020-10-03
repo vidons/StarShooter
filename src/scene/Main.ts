@@ -1,7 +1,7 @@
 import { BackgroundGraphic } from "../BackgroundGraphic";
-import { WinGame } from "../WinGame";
+import { WinGame } from "../UI/WinGame";
 import { Torpedo } from "../ships/Torpedo";
-import { Score } from "../Score";
+import { Score } from "../UI/Score";
 
 class Main extends Phaser.Scene {
     private background: BackgroundGraphic;
@@ -44,7 +44,7 @@ class Main extends Phaser.Scene {
 
     update() {
         this.physics.add.overlap(this.torpedo, this.shipGroup, destroy, null, this);
-        
+
         if (this.mouse.isDown && this.control == false) {
             this.torpedo = this.physics.add.sprite(512, 256, 'torpedo');
             this.physics.moveTo(this.torpedo, this.input.x, this.input.y, 750);
@@ -66,8 +66,8 @@ function destroy(torpedo, shipGroup): void {
 
     this.scoreGame += 100;
     this.scoreTableau.destroy();
-    this.scoreTableau = new Phaser.GameObjects.Text(this, this.cameras.main.width / 2, 10, "Score: " + this.scoreGame, null);
-    
+    this.scoreTableau = new Score(this, "Score: " + this.scoreGame);
+
     this.control = false;
 
     if (this.shipGroup.getChildren().length == 0) {
@@ -79,7 +79,7 @@ function destroy(torpedo, shipGroup): void {
                 this.scoreGame = 0;
                 this.scene.start("menu");
             }, null, this);
-            
+
         }, null, this);
     }
 }

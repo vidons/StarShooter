@@ -3,6 +3,7 @@ class Score extends Phaser.GameObjects.Text {
 
     constructor(scene: Phaser.Scene, text: string) {
         super(scene, scene.cameras.main.width / 2, 10, text, null);
+        
         this.setFontSize(20);
     }
 }
