@@ -1,6 +1,5 @@
-import { Physics } from "phaser";
 import { BackgroundGraphic } from "../BackgroundGraphic";
-import { BtnBattle } from "../BtnBattle";
+import { WinGame } from "../WinGame";
 import { Torpedo } from "../Torpedo";
 
 class Main extends Phaser.Scene {
@@ -16,7 +15,7 @@ class Main extends Phaser.Scene {
 
     control: boolean = false;
 
-    private btnBattle: BtnBattle;
+    private winGame: WinGame;
 
     private scoreTableau: Phaser.GameObjects.Text;
     private scoreGame: number = 0;
@@ -64,7 +63,6 @@ class Main extends Phaser.Scene {
 function destroy(torpedo, shipGroup): void {
 
     shipGroup.destroy(true, true);
-    console.log();
     torpedo.disableBody(true, true);
 
     this.scoreGame += 100;
@@ -75,9 +73,14 @@ function destroy(torpedo, shipGroup): void {
 
     if (this.shipGroup.getChildren().length == 0) {
         let timer: Phaser.Time.TimerEvent = this.scene.scene.time.delayedCall(2000, () => {
-            console.log("Win!");
-            this.btnBattle = new BtnBattle(this);
-            this.add.existing(this.btnBattle);
+            this.winGame = new WinGame(this);
+            this.add.existing(this.winGame);
+
+            let timer: Phaser.Time.TimerEvent = this.scene.scene.time.delayedCall(2000, () => {
+                this.scoreGame = 0;
+                this.scene.start("menu");
+            }, null, this);
+            
         }, null, this);
     }
 }
