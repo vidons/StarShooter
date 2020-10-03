@@ -20,6 +20,9 @@ class Main extends Phaser.Scene {
 
     private btnBattle: BtnBattle;
 
+    private scoreTableau: Phaser.GameObjects.Text;
+    private gameScore: number = 0;
+
 
     constructor() {
         super("main");
@@ -40,16 +43,27 @@ class Main extends Phaser.Scene {
         this.worldBounds = this.physics.world.bounds;
 
         this.torpedo = new Torpedo(this);
+
+        this.scoreTableau = new Phaser.GameObjects.Text(this, this.cameras.main.width / 2, 10, "Score: " + this.gameScore, null);
+        this.add.existing(this.scoreTableau);
     }
 
     update() {
         this.physics.add.overlap(this.torpedo, this.shipGroup, destroy, null, this);
-
+        
         if (this.mouse.isDown && this.control == false) {
             this.torpedo = this.physics.add.sprite(512, 256, 'torpedo');
             this.physics.moveTo(this.torpedo, this.input.x, this.input.y, 750);
             this.control = true;
+
+
+            this.gameScore += 100;
+            
+
         }
+
+        
+        this.add.existing(this.scoreTableau);
 
         if (this.torpedo.x > this.worldBounds.width || this.torpedo.y > this.worldBounds.height || this.torpedo.x < 0 || this.torpedo.y < 0) {
             this.control = false;
@@ -61,9 +75,12 @@ class Main extends Phaser.Scene {
 function destroy(torpedo, shipGroup): void {
 
     shipGroup.destroy(true, true);
-    //console.log(shipGroup.children.size);
     console.log();
     torpedo.disableBody(true, true);
+
+    this.scoreTableau.destroy();
+    this.scoreTableau = new Phaser.GameObjects.Text(this, this.cameras.main.width / 2, 10, "Score: " + this.gameScore, null);
+    
     this.control = false;
 
     if (this.shipGroup.getChildren().length == 0) {
