@@ -8,7 +8,7 @@ import { Torpedo } from "../Torpedo";
 class Main extends Phaser.Scene {
     private background: BackgroundGraphic;
 
-    shipGroup: Phaser.Physics.Arcade.Group;
+    private shipGroup: Phaser.Physics.Arcade.Group;
     private torpedo: Torpedo;
 
     private mouse: Phaser.Input.Pointer;
@@ -27,7 +27,6 @@ class Main extends Phaser.Scene {
 
 
     create() {
-
         this.background = new BackgroundGraphic(this);
         this.add.existing(this.background);
 
@@ -36,7 +35,6 @@ class Main extends Phaser.Scene {
         this.shipGroup.create(this.cameras.main.width / 7, (this.cameras.main.height / 4) * 3, "ships", "IntrepidClass");
         this.shipGroup.create(this.cameras.main.width * 0.85, this.cameras.main.height / 4, "ships", "CubeClass");
         this.shipGroup.create(this.cameras.main.width * 0.85, (this.cameras.main.height / 4) * 3, "ships", "ProbeClass");
-
 
         this.mouse = this.input.mousePointer;
         this.worldBounds = this.physics.world.bounds;
@@ -48,7 +46,6 @@ class Main extends Phaser.Scene {
         this.physics.add.overlap(this.torpedo, this.shipGroup, destroy, null, this);
 
         if (this.mouse.isDown && this.control == false) {
-
             this.torpedo = this.physics.add.sprite(512, 256, 'torpedo');
             this.physics.moveTo(this.torpedo, this.input.x, this.input.y, 750);
             this.control = true;
@@ -61,7 +58,6 @@ class Main extends Phaser.Scene {
 
 }
 
-
 function destroy(torpedo, shipGroup): void {
 
     shipGroup.destroy(true, true);
@@ -71,12 +67,11 @@ function destroy(torpedo, shipGroup): void {
     this.control = false;
 
     if (this.shipGroup.getChildren().length == 0) {
-        timer: Phaser.Time.TimerEvent = this.scene.scene.time.delayedCall(2000, () => {
+        let timer: Phaser.Time.TimerEvent = this.scene.scene.time.delayedCall(2000, () => {
             console.log("Win!");
             this.btnBattle = new BtnBattle(this);
             this.add.existing(this.btnBattle);
         }, null, this);
-
     }
 }
 
