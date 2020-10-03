@@ -14,8 +14,8 @@ class Menu extends Phaser.Scene {
         this.background = new BackgroundGraphic(this);
         this.add.existing(this.background);
         
-        this.gameName = new Phaser.GameObjects.Text(this, this.cameras.main.width / 2, this.cameras.main.height / 2, "Star Shooter", null)
-        this.gameName.setFont("tng");
+        this.gameName = new Phaser.GameObjects.Text(this, this.cameras.main.centerX, this.cameras.main.centerY, "Star Shooter", null);
+        this.gameName.setPosition(this.cameras.main.centerX - this.gameName.width, this.cameras.main.centerY - this.gameName.height);
         this.gameName.setFontSize(30);
         this.add.existing(this.gameName);
 
