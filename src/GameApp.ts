@@ -2,6 +2,7 @@ import 'phaser';
 import { Boot } from './scene/Boot';
 import { Preload } from './scene/Preload';
 import { SplashScene } from './scene/SplashScene';
+import { Menu } from './scene/Menu';
 import { Main } from './scene/Main';
 
 class GameApp extends Phaser.Game {
@@ -23,7 +24,7 @@ class GameApp extends Phaser.Game {
                         //debug: true,
                     }
                 }, 
-                scene: [Boot, SplashScene, Preload, Main]
+                scene: [Boot, SplashScene, Preload, Menu, Main]
             };
         }
 

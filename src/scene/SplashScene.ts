@@ -1,5 +1,7 @@
+import { BackgroundGraphic } from "../BackgroundGraphic";
+
 class SplashScene extends Phaser.Scene {
-    private background: Phaser.GameObjects.Sprite;
+    private background: BackgroundGraphic;
     private splash: Phaser.GameObjects.Sprite;
 
     constructor() {
@@ -7,8 +9,7 @@ class SplashScene extends Phaser.Scene {
     }
 
     create() {
-        this.background = new Phaser.GameObjects.Sprite(this, 0, 0, "background");
-        this.background.setPosition(this.cameras.main.width / 2, this.cameras.main.height / 2);
+        this.background = new BackgroundGraphic(this);
         this.add.existing(this.background);
 
         this.splash = new Phaser.GameObjects.Sprite(this, 0, 0, "foreground", "station");
@@ -30,7 +31,7 @@ class SplashScene extends Phaser.Scene {
 
     private nextState(): void {
         let timer: Phaser.Time.TimerEvent = this.scene.scene.time.delayedCall(600, () => {
-            this.scene.start("main");
+            this.scene.start("menu");
         }, null, this);
     }
 }

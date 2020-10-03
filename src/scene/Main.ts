@@ -1,7 +1,5 @@
 import { Physics } from "phaser";
 import { BackgroundGraphic } from "../BackgroundGraphic";
-import { FriendlyShips } from "../ships/FriendlyShips";
-import { EnemyShips } from "../ships/EnemyShips";
 import { BtnBattle } from "../BtnBattle";
 import { Torpedo } from "../Torpedo";
 
@@ -21,13 +19,11 @@ class Main extends Phaser.Scene {
     private btnBattle: BtnBattle;
 
     private scoreTableau: Phaser.GameObjects.Text;
-    private gameScore: number = 0;
-
+    private scoreGame: number = 0;
 
     constructor() {
         super("main");
     }
-
 
     create() {
         this.background = new BackgroundGraphic(this);
@@ -44,7 +40,7 @@ class Main extends Phaser.Scene {
 
         this.torpedo = new Torpedo(this);
 
-        this.scoreTableau = new Phaser.GameObjects.Text(this, this.cameras.main.width / 2, 10, "Score: " + this.gameScore, null);
+        this.scoreTableau = new Phaser.GameObjects.Text(this, this.cameras.main.width / 2, 10, "Score: " + this.scoreGame, null);
         this.add.existing(this.scoreTableau);
     }
 
@@ -55,21 +51,14 @@ class Main extends Phaser.Scene {
             this.torpedo = this.physics.add.sprite(512, 256, 'torpedo');
             this.physics.moveTo(this.torpedo, this.input.x, this.input.y, 750);
             this.control = true;
-
-
-            this.gameScore += 100;
-            
-
         }
 
-        
         this.add.existing(this.scoreTableau);
 
         if (this.torpedo.x > this.worldBounds.width || this.torpedo.y > this.worldBounds.height || this.torpedo.x < 0 || this.torpedo.y < 0) {
             this.control = false;
         }
     }
-
 }
 
 function destroy(torpedo, shipGroup): void {
@@ -78,8 +67,9 @@ function destroy(torpedo, shipGroup): void {
     console.log();
     torpedo.disableBody(true, true);
 
+    this.scoreGame += 100;
     this.scoreTableau.destroy();
-    this.scoreTableau = new Phaser.GameObjects.Text(this, this.cameras.main.width / 2, 10, "Score: " + this.gameScore, null);
+    this.scoreTableau = new Phaser.GameObjects.Text(this, this.cameras.main.width / 2, 10, "Score: " + this.scoreGame, null);
     
     this.control = false;
 
