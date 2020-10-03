@@ -1,6 +1,6 @@
 import { BackgroundGraphic } from "../BackgroundGraphic";
 import { WinGame } from "../WinGame";
-import { Torpedo } from "../Torpedo";
+import { Torpedo } from "../ships/Torpedo";
 import { Score } from "../Score";
 
 class Main extends Phaser.Scene {
