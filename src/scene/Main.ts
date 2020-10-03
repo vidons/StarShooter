@@ -1,6 +1,7 @@
 import { BackgroundGraphic } from "../BackgroundGraphic";
 import { WinGame } from "../WinGame";
 import { Torpedo } from "../Torpedo";
+import { Score } from "../Score";
 
 class Main extends Phaser.Scene {
     private background: BackgroundGraphic;
@@ -15,9 +16,7 @@ class Main extends Phaser.Scene {
 
     control: boolean = false;
 
-    private winGame: WinGame;
-
-    private scoreTableau: Phaser.GameObjects.Text;
+    private scoreTableau: Score;
     private scoreGame: number = 0;
 
     constructor() {
@@ -39,7 +38,7 @@ class Main extends Phaser.Scene {
 
         this.torpedo = new Torpedo(this);
 
-        this.scoreTableau = new Phaser.GameObjects.Text(this, this.cameras.main.width / 2, 10, "Score: " + this.scoreGame, null);
+        this.scoreTableau = new Score(this, "Score: " + this.scoreGame);
         this.add.existing(this.scoreTableau);
     }
 
