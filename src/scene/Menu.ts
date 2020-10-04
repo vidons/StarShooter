@@ -5,6 +5,7 @@ class Menu extends Phaser.Scene {
 
     private gameName: Phaser.GameObjects.Text;
     private easyLvl: Phaser.GameObjects.Text;
+    private normalLvl: Phaser.GameObjects.Text;
 
     constructor() {
         super("menu");
@@ -24,6 +25,12 @@ class Menu extends Phaser.Scene {
             this.scene.start("main")
         });
         this.add.existing(this.easyLvl);
+
+        this.normalLvl = new Phaser.GameObjects.Text(this, this.cameras.main.width / 2, (this.cameras.main.height / 2) + (this.gameName.height * 2), "Normal", null).setInteractive();
+        this.normalLvl.on("pointerup", () => {
+            this.scene.start("normal")
+        });
+        this.add.existing(this.normalLvl);
     }
 
 

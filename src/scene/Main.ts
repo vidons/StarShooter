@@ -38,7 +38,7 @@ class Main extends Phaser.Scene {
 
         this.torpedo = new Torpedo(this);
 
-        this.scoreTableau = new Score(this, "Score: " + this.scoreGame);
+        this.scoreTableau = new Score(this, `Score: ${this.scoreGame}`);
         this.add.existing(this.scoreTableau);
     }
 
