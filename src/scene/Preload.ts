@@ -42,6 +42,7 @@ class Preload extends Phaser.Scene {
         this.load.image("background", "assets/images/background.png");
         this.load.atlas("foreground", "assets/images/foreground.png", "assets/images/foreground.json");
         this.load.atlas("ships", "assets/images/ships.png", "assets/images/ships.json")
+        this.load.image("empokNor", "assets/images/empokNor.png")
 
         this.load.image('torpedo','./assets/images/torpedo.png');
 

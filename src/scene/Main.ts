@@ -7,6 +7,7 @@ class Main extends Phaser.Scene {
     private background: BackgroundGraphic;
 
     private shipGroup: Phaser.Physics.Arcade.Group;
+    private station: Phaser.GameObjects.Sprite;
     private torpedo: Torpedo;
 
     private mouse: Phaser.Input.Pointer;
@@ -26,6 +27,11 @@ class Main extends Phaser.Scene {
     create() {
         this.background = new BackgroundGraphic(this);
         this.add.existing(this.background);
+
+        this.station = new Phaser.GameObjects.Sprite(this, this.cameras.main.width / 2, this.cameras.main.height / 2, "empokNor");
+        this.add.existing(this.station);
+
+        
 
         this.shipGroup = this.physics.add.group();
         this.shipGroup.create(this.cameras.main.width * 0.15, this.cameras.main.height / 4, "ships", "GalaxyClass");
