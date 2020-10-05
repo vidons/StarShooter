@@ -1,7 +1,7 @@
 class WinGame extends Phaser.GameObjects.Text {
 
     constructor(scene: Phaser.Scene) {
-        super(scene, scene.cameras.main.width / 2, scene.cameras.main.height / 2, "WIN", null);
+        super(scene, scene.cameras.main.width / 2, (scene.cameras.main.height / 10 ) * 9, "WIN", null);
 
         this.setInteractive();
         this.setFontSize(28);

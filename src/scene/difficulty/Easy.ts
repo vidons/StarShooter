@@ -82,7 +82,6 @@ function destroy(torpedo, shipGroup): void {
             let timer: Phaser.Time.TimerEvent = this.scene.scene.time.delayedCall(2000, () => {
                 this.scoreGame = 0;
                 this.scene.start("menu");
-                this.scene.remove("easy");
             }, null, this);
 
         }, null, this);
