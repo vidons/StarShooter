@@ -1,6 +1,6 @@
 import { BackgroundGraphic } from "../../BackgroundGraphic";
 import { WinGame } from "../../UI/WinGame";
-import { Station } from "../../shipsAndStation/Station";
+import { Station } from "../../Station";
 import { Score } from "../../UI/Score";
 
 class Easy extends Phaser.Scene {

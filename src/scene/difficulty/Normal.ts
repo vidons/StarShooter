@@ -1,7 +1,7 @@
 import { BackgroundGraphic } from "../../BackgroundGraphic";
 import { WinGame } from "../../UI/WinGame";
 import { GameOver } from "../../UI/GameOver"
-import { Station } from "../../shipsAndStation/Station";
+import { Station } from "../../Station";
 import { Score } from "../../UI/Score";
 
 class Normal extends Phaser.Scene {
