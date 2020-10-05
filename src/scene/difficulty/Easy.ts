@@ -15,7 +15,7 @@ class Easy extends Phaser.Scene {
 
     private worldBounds: Phaser.Types.Physics.Arcade.ArcadeWorldConfig;
 
-    control: boolean = false;
+    private control: boolean = false;
 
     private scoreTableau: Score;
     private scoreGame: number = 0;

@@ -12,7 +12,7 @@ class SplashScene extends Phaser.Scene {
         this.background = new BackgroundGraphic(this);
         this.add.existing(this.background);
 
-        this.splash = new Phaser.GameObjects.Sprite(this, 0, 0, "foreground", "station");
+        this.splash = new Phaser.GameObjects.Sprite(this, 0, 0, "logo");
         this.splash.setPosition(this.cameras.main.width / 2, -this.splash.height / 2);
         this.add.existing(this.splash);
 
