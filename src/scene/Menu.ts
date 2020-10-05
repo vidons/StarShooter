@@ -22,7 +22,7 @@ class Menu extends Phaser.Scene {
 
         this.easyLvl = new Phaser.GameObjects.Text(this, this.cameras.main.width / 2, (this.cameras.main.height / 2) + this.gameName.height, "Easy", null).setInteractive();
         this.easyLvl.on("pointerup", () => {
-            this.scene.start("main")
+            this.scene.start("easy")
         });
         this.add.existing(this.easyLvl);
 

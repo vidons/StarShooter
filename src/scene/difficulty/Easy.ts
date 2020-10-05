@@ -1,15 +1,14 @@
-import { BackgroundGraphic } from "../BackgroundGraphic";
-import { WinGame } from "../UI/WinGame";
-import { Torpedo } from "../shipsAndStation/Torpedo";
-import { Station } from "../shipsAndStation/Station";
-import { Score } from "../UI/Score";
+import { BackgroundGraphic } from "../../BackgroundGraphic";
+import { WinGame } from "../../UI/WinGame";
+import { Station } from "../../shipsAndStation/Station";
+import { Score } from "../../UI/Score";
 
-class Main extends Phaser.Scene {
+class Easy extends Phaser.Scene {
     private background: BackgroundGraphic;
 
     private shipGroup: Phaser.Physics.Arcade.Group;
     private station: Station;
-    private torpedo: Torpedo;
+    private torpedo: Phaser.GameObjects.Sprite;
 
     private mouse: Phaser.Input.Pointer;
     public input: Phaser.Input.InputPlugin;
@@ -22,7 +21,7 @@ class Main extends Phaser.Scene {
     private scoreGame: number = 0;
 
     constructor() {
-        super("main");
+        super("easy");
     }
 
     create() {
@@ -41,7 +40,7 @@ class Main extends Phaser.Scene {
         this.mouse = this.input.mousePointer;
         this.worldBounds = this.physics.world.bounds;
 
-        this.torpedo = new Torpedo(this);
+        this.torpedo = new Phaser.GameObjects.Sprite(this, this.cameras.main.width / 2, this.cameras.main.height / 2, "torpedo");
 
         this.scoreTableau = new Score(this, `Score: ${this.scoreGame}`);
         this.add.existing(this.scoreTableau);
@@ -51,7 +50,7 @@ class Main extends Phaser.Scene {
         this.physics.add.overlap(this.torpedo, this.shipGroup, destroy, null, this);
 
         if (this.mouse.isDown && this.control == false) {
-            this.torpedo = this.physics.add.sprite(512, 256, 'torpedo');
+            this.torpedo = this.physics.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, "torpedo");
             this.physics.moveTo(this.torpedo, this.input.x, this.input.y, 750);
             this.control = true;
         }
@@ -83,10 +82,11 @@ function destroy(torpedo, shipGroup): void {
             let timer: Phaser.Time.TimerEvent = this.scene.scene.time.delayedCall(2000, () => {
                 this.scoreGame = 0;
                 this.scene.start("menu");
+                this.scene.remove("easy");
             }, null, this);
 
         }, null, this);
     }
 }
 
-export { Main }
+export { Easy }
