@@ -91,7 +91,7 @@ class Normal extends Phaser.Scene {
     }
 
     update() {
-        this.physics.add.overlap(this.torpedo, this.shipGroup, destroy, null, this);
+        this.physics.add.overlap(this.torpedo, this.shipGroup, this.destroy, null, this);
 
         if (this.mouse.isDown && this.control == false) {
             this.torpedo = this.physics.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, "torpedo");
@@ -104,28 +104,30 @@ class Normal extends Phaser.Scene {
             this.control = false;
         }
     }
-}
 
-function destroy(torpedo, shipGroup): void {
+    destroy(torpedo, shipGroup): void {
 
-    shipGroup.destroy(true, true);
-    torpedo.disableBody(true, true);
-
-    this.scoreGame += 100;
-    this.scoreTableau.destroy();
-    this.scoreTableau = new Score(this, "Score: " + this.scoreGame);
-
-    this.control = false;
-
-    if (this.shipGroup.getChildren().length == 0) {
-            this.winGame = new WinGame(this);
-            this.add.existing(this.winGame);
-
-            let timer: Phaser.Time.TimerEvent = this.scene.scene.time.delayedCall(1000, () => {
-                this.scoreGame = 0;
-                this.timeGame = 30;
-                this.scene.start("menu");
+        shipGroup.destroy(true, true);
+        torpedo.disableBody(true, true);
+    
+        this.scoreGame += 100;
+        this.scoreTableau.destroy();
+        this.scoreTableau = new Score(this, "Score: " + this.scoreGame);
+    
+        this.control = false;
+    
+        if (this.shipGroup.getChildren().length == 0) {
+            let timer: Phaser.Time.TimerEvent = this.scene.scene.time.delayedCall(2000, () => {
+                let winGame = new WinGame(this);
+                this.add.existing(winGame);
+    
+                let timer: Phaser.Time.TimerEvent = this.scene.scene.time.delayedCall(2000, () => {
+                    this.scoreGame = 0;
+                    this.scene.start("menu");
+                }, null, this);
+    
             }, null, this);
+        }
     }
 }
 
