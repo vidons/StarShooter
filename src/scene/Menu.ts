@@ -6,6 +6,7 @@ class Menu extends Phaser.Scene {
     private gameName: Phaser.GameObjects.Text;
     private easyLvl: Phaser.GameObjects.Text;
     private normalLvl: Phaser.GameObjects.Text;
+    private advanceLvl: Phaser.GameObjects.Text;
 
     constructor() {
         super("menu");
@@ -22,15 +23,21 @@ class Menu extends Phaser.Scene {
 
         this.easyLvl = new Phaser.GameObjects.Text(this, this.cameras.main.width / 2, (this.cameras.main.height / 2) + this.gameName.height, "Easy", null).setInteractive();
         this.easyLvl.on("pointerup", () => {
-            this.scene.start("easy")
+            this.scene.start("easy");
         });
         this.add.existing(this.easyLvl);
 
         this.normalLvl = new Phaser.GameObjects.Text(this, this.cameras.main.width / 2, (this.cameras.main.height / 2) + (this.gameName.height * 2), "Normal", null).setInteractive();
         this.normalLvl.on("pointerup", () => {
-            this.scene.start("normal")
+            this.scene.start("normal");
         });
         this.add.existing(this.normalLvl);
+
+        this.advanceLvl = new Phaser.GameObjects.Text(this, this.cameras.main.width / 2, (this.cameras.main.height / 2) + (this.gameName.height * 3), "Advance", null).setInteractive();
+        this.advanceLvl.on("pointerup", () => {
+            this.scene.start("advance");
+        });
+        this.add.existing(this.advanceLvl);
     }
 
 
