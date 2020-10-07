@@ -8,9 +8,8 @@ class Advance extends Phaser.Scene {
     private background: BackgroundGraphic;
 
     private station: Station;
-    private shipGroup: Phaser.Physics.Arcade.Group;
-    private generateShips: Phaser.Time.TimerEvent;
 
+    private ship: Phaser.GameObjects.Sprite;
     private torpedo: Phaser.GameObjects.Sprite;
 
     private mouse: Phaser.Input.Pointer;
@@ -38,22 +37,8 @@ class Advance extends Phaser.Scene {
         this.station = new Station(this);
         this.add.existing(this.station);
 
-        this.shipGroup = this.physics.add.group();
-        this.shipGroup.create(this.cameras.main.width * 0.15, this.cameras.main.height / 4, "ships", "GalaxyClass");
-        this.shipGroup.create(this.cameras.main.width / 7, (this.cameras.main.height / 4) * 3, "ships", "IntrepidClass");
-        this.shipGroup.create(this.cameras.main.width * 0.85, this.cameras.main.height / 4, "ships", "CubeClass");
-        this.shipGroup.create(this.cameras.main.width * 0.85, (this.cameras.main.height / 4) * 3, "ships", "ProbeClass");
- 
-        this.generateShips = this.time.addEvent({
-            delay: 4000,
-            callback: () => {
-                this.shipGroup.create(this.cameras.main.width * 0.15, this.cameras.main.height / 4, "ships", "GalaxyClass");
-                this.shipGroup.create(this.cameras.main.width / 7, (this.cameras.main.height / 4) * 3, "ships", "IntrepidClass");
-                this.shipGroup.create(this.cameras.main.width * 0.85, this.cameras.main.height / 4, "ships", "CubeClass");
-                this.shipGroup.create(this.cameras.main.width * 0.85, (this.cameras.main.height / 4) * 3, "ships", "ProbeClass");
-            },
-            loop: true
-        })
+        this.ship = new Phaser.GameObjects.Sprite(this, 100, 100, "ships", "cube");
+        this.add.existing(this.ship);
 
         this.mouse = this.input.mousePointer;
         this.worldBounds = this.physics.world.bounds;
@@ -91,7 +76,7 @@ class Advance extends Phaser.Scene {
     }
 
     update() {
-        this.physics.add.overlap(this.torpedo, this.shipGroup, this.destroy, null, this);
+        //this.physics.add.overlap(this.torpedo, this.shipGroup, this.destroy, null, this);
 
         if (this.mouse.isDown && this.control == false) {
             this.torpedo = this.physics.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, "torpedo");
@@ -105,6 +90,7 @@ class Advance extends Phaser.Scene {
         }
     }
 
+    /*
     destroy(torpedo, shipGroup): void {
 
         shipGroup.destroy(true, true);
@@ -129,6 +115,7 @@ class Advance extends Phaser.Scene {
             }, null, this);
         }
     }
+    */
 }
 
 export { Advance }
